@@ -217,3 +217,106 @@ Next :::
 	- Setup the Kubernetes Cluster ::
 	
 	- Working with Kubernetes to Automate Continuous Deployment ::
+
+	
+##########################
+Day - 22 | 11th May 2026
+##########################
+
+	- Setup the Kubernetes Architecture :::
+	
+		- Open-Source Kubernetes :::
+		
+			- kubeadm 			# To Setup the Prod grade Kubernetes Control_Plane & WorkerNodes
+								# Multi_Node Cluster
+				
+
+				
+		- Kubernetes_Master(Control_Plane)(VM)	- Prod Kubernetes Cluster
+				- Kubernetes_WorkNode1 (VM)
+				- Kubernetes_WorkNode2 (VM)
+				
+				
+				
+	- High-Level Steps involved in Setting up of Kubernetes using Kubeadm ::
+	
+	
+		Create Nodes :
+
+			1. Launch EC2 Ubuntu Instances -> (1 + 2)
+			2. Update the Security Group with the required Ports
+		
+		On all the Nodes: (Master & WorkerNodes)
+		
+			3. Assign unique hostname for all the Nodes. 
+			4. Disable Swap on all the Nodes 
+			5. Install and Setup CRI 
+			6. Enable CRI 
+			7. Install and Setup Kubeadm, Kubelet, Kubectl 
+			8. Enable Kubelet
+			
+		Only on Master Node:
+		
+			9. Initialize Kubeadm 		#  api_server,etcd,scheduler,core_dns,kube_proxy,
+			10. Setup the Access to Kubectl using Kube_config File
+			11. Setup Network Plugins - Flannel/Calico Network Plugin 
+			12. Verify the Nodes & System Pods 
+				
+				- kubectl get nodes 
+				
+				- kubectl get pods --all-namespaces 
+
+				- kubectl get pods --all-namespaces -o wide 
+
+			
+		Only on WorkNodes:
+		
+			13. Execute Kubeadm Join Command to attach the WorkerNodes to Kubernetes Master Node
+		
+		
+
+	Concepts :
+	
+	- Namespace 			# It is a Logical Partitioning of the Cluster
+	
+		Environments:
+		
+			Non-Prod 										Prod 
+			
+				- Dev 													
+				
+				- QA 
+				
+				- UAT 
+							# Namespace can be created based on the Environments / Teams 
+	
+		- kubectl get ns 
+		
+		- kubectl create namespace dev 
+
+		- kubectl create namespace qa 
+
+		- kubectl create namespace appteam1-dev 
+		- kubectl create namespace appteam1-qa
+
+		- kubectl create namespace appteam2-dev 
+		- kubectl create namespace appteam2-qa
+
+
+
+Next :::
+	
+	- Pod Deployments :::
+	
+		- Kubectl Commands 
+		
+		- Pod Deployment 
+		
+			- Single Contianer Pod 
+
+			- Multi Container Pod 
+			
+		- Pod Networking 
+		
+		- Manifest - written using *.yaml
+		
